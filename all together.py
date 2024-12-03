@@ -42,7 +42,7 @@ def extract(url):
 def alllinks(url):
     dicosol = {}
     liste = []
-    dico[extract(url)[0]] = extract(url)[1]
+    dicosol[extract(url)[0]] = extract(url)[1]
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'html.parser')
     allLinks = soup.select("p a")
@@ -56,9 +56,9 @@ def alllinks(url):
         new_url = "https://en.wikipedia.org" + i
         print(new_url)
         titre = extract(new_url)[0]
-        dico[titre] = extract(new_url)[1]
+        dicosol[titre] = extract(new_url)[1]
         dicoliens[titre] = new_url
-    return [dico, dicoliens]
+    return [dicosol, dicoliens]
 
 
 def exctractcorpus(url):
@@ -151,9 +151,10 @@ def sim_mat(df_tf_idf):
 
 
 def getsimilarlinks(url):
-    dico = alllinks(url)[0]
+    dicocorpus = alllinks(url)[0]
     dicoliens = alllinks(url)[1]
-    df = tdm(dico)
+    print(dicocorpus)
+    df = tdm(dicocorpus)
     dfvectorisé = tfidf(df)
     simmat = sim_mat(dfvectorisé)
     simmat = simmat.iloc[:, [0]]
