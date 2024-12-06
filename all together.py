@@ -160,7 +160,7 @@ def getsimilarlinks(url):
     simmat = simmat.iloc[:, [0]]
     simmat = simmat.sort_values(by=simmat.columns[0], ascending=False)
 
-    filtered_df = simmat[(simmat.iloc[:, 0] >= 0.10)]
+    filtered_df = simmat[(simmat.iloc[:, 0] >= 0.20)]
     article_list = filtered_df.index.tolist()
     listeliens = []
     article_list = article_list[1:]
