@@ -1,6 +1,9 @@
+from scipy.sparse import lil_matrix, save_npz
 from bs4 import BeautifulSoup
 import requests
 import nltk
+import pandas as pd
+
 nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('punkt_tab')
@@ -13,8 +16,11 @@ from collections import Counter
 import string
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
+
 mots_vides = list(set(stopwords.words('english'))) + ["'s"]
 stem = nltk.stem.SnowballStemmer("english")
+
+
 def howmuchword(liste, mot):
     count = 0
     for i in liste:
@@ -22,8 +28,9 @@ def howmuchword(liste, mot):
             count += 1
     return count
 
-def getsimilarlinks(url) :
-    liste_totale = [] 
+
+def getsimilarlinks(url):
+    liste_totale = []
     dicoliens = {}
     dicotokens = {}
     response = requests.get(url)
@@ -32,38 +39,40 @@ def getsimilarlinks(url) :
     liens = soup.select("p a")
     corpus = ""
     corpusliste = soup.select("p")
-    for i in corpusliste : 
-        corpus  += i.text
+    for i in corpusliste:
+        corpus += i.text
     tokens = corpus.lower()
     tokens = nltk.word_tokenize(tokens)
     tokens = [stem.stem(token)  # Étape 4 : appliquer le stemming
-    for token in nltk.word_tokenize(corpus.lower())  # Étape 1 : mise en minuscule + tokenisation
-    if token not in string.punctuation and token not in mots_vides  # Étapes 2 et 3 : suppression des ponctuations et mots vides
-    ]
-    liste_totale+=tokens
+              for token in nltk.word_tokenize(corpus.lower())  # Étape 1 : mise en minuscule + tokenisation
+              if token not in string.punctuation and token not in mots_vides
+              # Étapes 2 et 3 : suppression des ponctuations et mots vides
+              ]
+    liste_totale += tokens
     dicoliens[soup.select('h1')[0].text] = url
     dicotokens[soup.select('h1')[0].text] = tokens
     for link in liens:
         if link.has_attr('href') and link['href'].startswith("/wiki/"):
-            newurl = ("https://en.wikipedia.org"+link['href'])
+            newurl = ("https://en.wikipedia.org" + link['href'])
             print(newurl)
             response = requests.get(newurl)
             content = response.text
             soup = BeautifulSoup(content, "html.parser")
             head = soup.select("h1")
             head = head[0].text
-            if head not in dicoliens : 
+            if head not in dicoliens:
                 corpus = ""
                 corpusliste = soup.select("p")
-                for i in corpusliste : 
-                    corpus += i.text 
+                for i in corpusliste:
+                    corpus += i.text
                 tokens = corpus.lower()
                 tokens = nltk.word_tokenize(tokens)
                 tokens = [stem.stem(token)  # Étape 4 : appliquer le stemming
-                for token in nltk.word_tokenize(corpus.lower())  # Étape 1 : mise en minuscule + tokenisation
-                if token not in string.punctuation and token not in mots_vides  # Étapes 2 et 3 : suppression des ponctuations et mots vides
-                ]
-                liste_totale+=tokens
+                          for token in nltk.word_tokenize(corpus.lower())  # Étape 1 : mise en minuscule + tokenisation
+                          if token not in string.punctuation and token not in mots_vides
+                          # Étapes 2 et 3 : suppression des ponctuations et mots vides
+                          ]
+                liste_totale += tokens
                 dicotokens[head] = tokens
                 dicoliens[head] = newurl
     liste_totale = list(set(liste_totale))
@@ -78,6 +87,7 @@ def getsimilarlinks(url) :
             liste.append(0)
         matrice.append(liste)
     df = pd.DataFrame(matrice)
+
     df.columns = df.iloc[0]
     df = df[1:]
     df.set_index(df.columns[0], inplace=True)
@@ -111,97 +121,103 @@ def getsimilarlinks(url) :
     article_list = filtered_df.index.tolist()
     article_list = article_list[1:]
     liste = []
-    for i in range(len(article_list)) : 
+    for i in range(len(article_list)):
         print(str(i))
         print(article_list[i])
-    for i in article_list : 
+    for i in article_list:
         liste.append(dicoliens[i])
     return liste
-    
-    
-def recursive_crawl(link, depth, pages_list, adjacency_matrix, visited,last_depth_neighbours):
-    print('in the recursive crawl')
-    if depth == 0 or link in visited:
-        return last_depth_neighbours,pages_list, adjacency_matrix
 
-    # Marquer la page comme visitée
+
+def recursive_crawl(link, depth, pages_list, adjacency_dict, visited, current_depth):
+    #on analyse les liens de la derniere pronfondeur
+    if current_depth > depth:
+        return adjacency_dict
+    if link in visited:
+        return adjacency_dict
+
+        # Marquer la page comme visitée
     visited.add(link)
 
+    print("crawl of", link, "depth ", current_depth)
     if link not in pages_list:
         pages_list.append(link)
-        # Ajouter une nouvelle ligne et colonne à la matrice
-        n = len(pages_list)
-        for row in adjacency_matrix:
-            row.append(0)
-        adjacency_matrix.append([0] * n)
 
     # Obtenir les voisins de la page actuelle
-    print('searching neighbours ')
+    print('call fonction getsimilarlinks')
     neighbors = getsimilarlinks(link)
-    print(f"Exploring: {link}, Depth: {depth}, Neighbors: {len(neighbors)}")
+    print("got all the neighbours of ", link)
 
-    # Index de la page actuelle
-    current_index = pages_list.index(link)
+    # Ajouter les relations dans le dictionnaire
+    if link not in adjacency_dict:
+        adjacency_dict[link] = []
 
     for neighbor in neighbors:
+        if neighbor not in adjacency_dict[link]:
+            adjacency_dict[link].append(neighbor)
         if neighbor not in pages_list:
             pages_list.append(neighbor)
-            # Ajouter une nouvelle ligne et colonne à la matrice
-            n = len(pages_list)
-            for row in adjacency_matrix:
-                row.append(0)
-            adjacency_matrix.append([0] * n)
-        if depth == 1 :
-            last_depth_neighbours.add(neighbor)
 
-        # Index du voisin
-        neighbor_index = pages_list.index(neighbor)
-
-        # Mettre à jour la matrice pour marquer la connexion
-        adjacency_matrix[current_index][neighbor_index] = 1
-        print(f"Added edge: {link} -> {neighbor}")
-
+        print(  link,"'s neighbours : ",adjacency_dict[link])
         # Appel récursif pour explorer les voisins
-        last_depth_neighbours,pages_list, adjacency_matrix = recursive_crawl(neighbor, depth - 1, pages_list, adjacency_matrix, visited,last_depth_neighbours )
+        adjacency_dict = recursive_crawl(neighbor, depth, pages_list, adjacency_dict, visited,current_depth + 1)
 
-    return last_depth_neighbours,pages_list, adjacency_matrix
 
-def links_between_neighbours(last_depth_neighbours, pages_list, adjacency_matrix):
-    for page in last_depth_neighbours:
-        # Obtenir les voisins de la page actuelle
-        neighbors = web_crawler(page)
+    return adjacency_dict
 
-        current_index = pages_list.index(page)
-
-        for neighbor in neighbors:
-            if neighbor in pages_list:
-                    # Trouver l'indice du voisin dans `pages_list`
-                neighbor_index = pages_list.index(neighbor)
-
-                    # Mettre à jour la matrice d'adjacence
-                adjacency_matrix[current_index][neighbor_index] = 1
-
-    return adjacency_matrix
 
 def build_recursive_adjacency_matrix(start_link, depth=2):
-    pages_list = []  # pages explorées
-    adjacency_matrix = []  # Matrice d'adjacence
-    visited = set()  # pages dejà pages visitées
-    last_depth_neighbours = set()
-    print('start crawling')
-    last_depth_neighbours, pages_list, adjacency_matrix=recursive_crawl(start_link, depth, pages_list, adjacency_matrix, visited,last_depth_neighbours)
-    adjacency_matrix=links_between_neighbours(last_depth_neighbours,pages_list, adjacency_matrix)
-    print('crawling finish')
-    adjacency_df = pd.DataFrame(adjacency_matrix, index=pages_list, columns=pages_list)
-    return adjacency_df
+    print("building graph dynamically")
+    pages_list = []  # Liste des pages explorées
+    adjacency_dict = {}  # Dictionnaire pour stocker les relations
+    visited=set()
 
+    # Lancer le crawl récursif
+    adjacency_dict = recursive_crawl(start_link, depth, pages_list, adjacency_dict,visited, current_depth=1)
+
+
+    # Convertir en matrice creuse
+    n = len(pages_list)
+    adjacency_matrix = lil_matrix((n, n), dtype=np.int8)
+
+    for link, neighbors in adjacency_dict.items():
+        current_index = pages_list.index(link)
+        for neighbor in neighbors:
+            neighbor_index = pages_list.index(neighbor)
+            adjacency_matrix[current_index, neighbor_index] = 1
+            print("link between", link, " and ", neighbor, " created")
+
+    return adjacency_matrix, pages_list
 
 if __name__ == "__main__":
     start_url = "https://en.wikipedia.org/wiki/Social_inequality"
     depth = 2
-    adjacency_df = build_recursive_adjacency_matrix(start_url, depth)
+    adjacency_matrix, pages_list = build_recursive_adjacency_matrix(start_url, depth)
 
-    # Afficher et sauvegarder les résultats
-    print(adjacency_df)
-    adjacency_df.to_excel("adjacency_matrix.xlsx")
-    print("Done!")
+    # Convertir la matrice creuse en un tableau dense pour l'afficher complètement
+    dense_matrix = adjacency_matrix.toarray()
+
+    # Créer un DataFrame avec les noms des pages comme index et colonnes
+    df = pd.DataFrame(dense_matrix, index=pages_list, columns=pages_list)
+    print(df)
+    # Exporter vers un fichier Excel
+    output_excel = "adjacency_matrix.xlsx"
+    df.to_excel(output_excel, index=True)
+    print(f"Adjacency matrix exported to {output_excel}")
+
+
+# pour recuperer le excel en numpy
+
+# Charger le fichier Excel dans un DataFrame
+#input_excel = "adjacency_matrix.xlsx"
+#df = pd.read_excel(input_excel, index_col=0)
+
+# Convertir le DataFrame en matrice NumPy
+#numpy_matrix = df.to_numpy()
+
+# Récupérer les noms des pages (index et colonnes)
+#pages_list = df.index.tolist()
+
+# Vérification
+#print("Loaded matrix shape:", numpy_matrix.shape)
+#print("Loaded pages list:", pages_list[:5])  # Afficher les 5 premiers noms
