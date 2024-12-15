@@ -117,7 +117,7 @@ def getsimilarlinks(url):
     simmat = similarity_df.iloc[:, [0]]
     simmat = simmat.sort_values(by=simmat.columns[0], ascending=False)
     print(simmat)
-    filtered_df = simmat[(simmat.iloc[:, 0] >= 0.30)]
+    filtered_df = simmat[(simmat.iloc[:, 0] >= 0.20)]
     article_list = filtered_df.index.tolist()
     article_list = article_list[1:]
     liste = []
@@ -201,7 +201,7 @@ if __name__ == "__main__":
     df = pd.DataFrame(dense_matrix, index=pages_list, columns=pages_list)
     print(df)
     # Exporter vers un fichier Excel
-    output_excel = "adjacency_matrix.xlsx"
+    output_excel = "adjacency_matrix_V2.xlsx"
     df.to_excel(output_excel, index=True)
     print(f"Adjacency matrix exported to {output_excel}")
 
