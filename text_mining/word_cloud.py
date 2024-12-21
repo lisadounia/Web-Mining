@@ -9,7 +9,7 @@ from gensim.utils import simple_preprocess
 from nltk.corpus import stopwords
 from wordcloud import WordCloud
 mots_vides = list(set(stopwords.words('english'))) + ["'s"]
-def lemmatization (texts, allowed_posttags=["NOUN","ADJ","VERB","ADV"]): 
+def lemmatization (texts, allowed_posttags=["NOUN","ADJ","ADV"]): 
     nlp = spacy.load("en_core_web_sm",disable=["parser","ner"])
     texts_out = []
     for text in texts : 
@@ -35,7 +35,7 @@ def wordcloud(url) :
     response = requests.get(url)
     content = response.text
     soup = BeautifulSoup(content,"html.parser")
-    corpus = soup.select("p")
+    corpus = soup.select("ul")
     for i in range(len(corpus)) : 
         corpus[i] = corpus[i].text
     listemots = genwords(lemmatization(corpus))
@@ -55,4 +55,4 @@ def wordcloud(url) :
     wc.generate(listefinale)
     wc.to_file('word_could.png')
 
-wordcloud("https://en.wikipedia.org/wiki/Donald_Trump")
+wordcloud("https://en.wikiquote.org/wiki/Karl_Marx")
