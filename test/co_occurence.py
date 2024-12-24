@@ -59,7 +59,7 @@ df_fréquences = pd.DataFrame(list(dico_fréquence.items()), columns=["token", "
 df_fréquences = df_fréquences.sort_values(by='fréquence', ascending=False)
 print(df_fréquences.head(5))
 ma_liste = df_fréquences.iloc[:, 0].tolist()
-first = ma_liste[3]
+first = ma_liste[1]
 
 dico_cooccurence = {}
 for i in range(len(corpus)) : 
