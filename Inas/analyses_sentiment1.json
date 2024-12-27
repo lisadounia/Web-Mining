@@ -1,0 +1,66 @@
+{
+  "https://en.wikipedia.org/wiki/Thomas_Piketty": {
+    "sentiment": "Neutre",
+    "moyenne_polarite": 0.04831018518518518
+  },
+  "https://en.wikipedia.org/wiki/Ludwig_von_Mises": {
+    "sentiment": "Positif",
+    "moyenne_polarite": 0.11261105718460043
+  },
+  "https://en.wikipedia.org/wiki/Alfred_Marshall": {
+    "sentiment": "Neutre",
+    "moyenne_polarite": 0.011421957671957672
+  },
+  "https://en.wikipedia.org/wiki/Joseph_Schumpeter": {
+    "sentiment": "Positif",
+    "moyenne_polarite": 0.1466357022607023
+  },
+  "https://en.wikipedia.org/wiki/Jason_Hickel": {
+    "sentiment": "Neutre",
+    "moyenne_polarite": 0.04613095238095238
+  },
+  "https://en.wikipedia.org/wiki/Anthony_Giddens": {
+    "sentiment": "Positif",
+    "moyenne_polarite": 0.13636363636363635
+  },
+  "https://en.wikipedia.org/wiki/Karl_Marx": {
+    "sentiment": "Neutre",
+    "moyenne_polarite": 0.06380462218170566
+  },
+  "https://en.wikipedia.org/wiki/Michel_Foucault": {
+    "sentiment": "Neutre",
+    "moyenne_polarite": 0.09688737227612423
+  },
+  "https://en.wikipedia.org/wiki/Charles_V._Hamilton": {
+    "sentiment": "Neutre",
+    "moyenne_polarite": 0.03339160839160838
+  },
+  "https://en.wikipedia.org/wiki/Susan_Brownmiller": {
+    "sentiment": "Neutre",
+    "moyenne_polarite": 0.0
+  },
+  "https://en.wikipedia.org/wiki/Marilyn_Frye": {
+    "sentiment": "Neutre",
+    "moyenne_polarite": 0.07222222222222223
+  },
+  "https://en.wikipedia.org/wiki/Bill_Clinton": {
+    "sentiment": "Positif",
+    "moyenne_polarite": 0.10239642792481879
+  },
+  "https://en.wikipedia.org/wiki/Michelle_Alexander": {
+    "sentiment": "Neutre",
+    "moyenne_polarite": 0.06102307344731586
+  },
+  "https://en.wikipedia.org/wiki/Lyndon_B._Johnson": {
+    "sentiment": "Positif",
+    "moyenne_polarite": 0.13002408419789097
+  },
+  "https://en.wikipedia.org/wiki/Jimmy_Carter": {
+    "sentiment": "Neutre",
+    "moyenne_polarite": 0.07528682205167193
+  },
+  "https://en.wikipedia.org/wiki/Bill_Gates": {
+    "sentiment": "Neutre",
+    "moyenne_polarite": 0.08249124617376498
+  }
+}
