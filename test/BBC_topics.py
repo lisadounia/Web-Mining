@@ -41,7 +41,7 @@ for i in dico_mois :
     dico_mois[i] = dico
 dico_2024 = {}
 for i in dico_mois : 
-    if "2024" in i :
+    if "2023" in i :
         dico_2024[i] = dico_mois[i]
 data = dico_2024
 # Étape 1: Transformer les données
@@ -60,9 +60,9 @@ df['Rank'] = df.groupby('Month')['Count'].rank(method='first', ascending=False)
 top_topics = df.groupby('Topic')['Count'].sum().nlargest(5).index
 df_filtered = df[df['Topic'].isin(top_topics)]
 month_order = [
-    "Jan 2024", "Feb 2024", "Mar 2024", "Apr 2024", "May 2024", 
-    "Jun 2024", "Jul 2024", "Aug 2024", "Sep 2024", "Oct 2024", 
-    "Nov 2024", "Dec 2024"
+    "Jan 2023", "Feb 2023", "Mar 2023", "Apr 2023", "May 2023", 
+    "Jun 2023", "Jul 2023", "Aug 2023", "Sep 2023", "Oct 2023", 
+    "Nov 2023", "Dec 2023"
 ]
 df_filtered['Month'] = pd.Categorical(df_filtered['Month'], categories=month_order, ordered=True)
 # Étape 2: Créer le Bump Chart
