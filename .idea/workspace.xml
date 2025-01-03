@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3e9bc9f-d196-475b-b231-8382091cec3b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/link analysis/Cluster_distance_euclédienne.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Web-Mining.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analyse graph/Graph_analysis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graph/change_columns.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graph/matrix traitement.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graph/subgraph_cohesions/2.Cohesion.py" beforeDir="false" afterPath="$PROJECT_DIR$/graph/subgraph_cohesions/2.Cohesion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/link analysis/1.Bridges_ArticulationPoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/link analysis/1.Bridges_ArticulationPoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/link analysis/Analyse similarité local.py" beforeDir="false" afterPath="$PROJECT_DIR$/link analysis/Analyse similarité local.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/link analysis/Cluster_distance_euclédienne.py" beforeDir="false" afterPath="$PROJECT_DIR$/link analysis/Cluster_distance_euclédienne.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/text_mining/code_cleaner.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

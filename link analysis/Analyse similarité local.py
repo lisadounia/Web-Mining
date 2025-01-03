@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import pandas as pd
+import json
 
 # === Charger les données ===
 
@@ -7,16 +9,16 @@ cosine_matrix_path = '/Users/lisadounia/projets_masterQ1/Web-Mining/graph/simila
 preference_matrix_path = '/Users/lisadounia/projets_masterQ1/Web-Mining/graph/similarity/local similarities /similarity_preferential_attachment.xlsx'
 nodes_path = '/Users/lisadounia/projets_masterQ1/Web-Mining/graph/nodes.xlsx'
 
-# Charger les matrices
-cosine_matrix = pd.read_excel(cosine_matrix_path, index_col=0)
-preference_matrix = pd.read_excel(preference_matrix_path, index_col=0)
-
-# Charger le fichier nodes
-nodes_df = pd.read_excel(nodes_path)
-# Créer un dictionnaire qui mappe les indices aux noms
-node_mapping = nodes_df.set_index('Id')['Label'].to_dict()
-
-
+# # Charger les matrices
+# cosine_matrix = pd.read_excel(cosine_matrix_path, index_col=0)
+# preference_matrix = pd.read_excel(preference_matrix_path, index_col=0)
+#
+# # Charger le fichier nodes
+# nodes_df = pd.read_excel(nodes_path)
+# # Créer un dictionnaire qui mappe les indices aux noms
+# node_mapping = nodes_df.set_index('Id')['Label'].to_dict()
+#
+#
 
 
 # === Analyse Cosine Similarity ===
@@ -111,3 +113,35 @@ node_mapping = nodes_df.set_index('Id')['Label'].to_dict()
 # # Exporter le résultat combiné
 # combined_df.to_excel('/Users/lisadounia/projets_masterQ1/Web-Mining/graph/similarity/Combined_Analysis.xlsx', index=False)
 
+
+
+# Charger le fichier Excel
+excel_file = '/Users/lisadounia/projets_masterQ1/Web-Mining/graph/similarity/local similarities /Combined_Analysis.xlsx'
+df = pd.read_excel(excel_file)
+
+# Charger le fichier JSON contenant les clusters
+clusters_file = '/Users/lisadounia/projets_masterQ1/Web-Mining/link analysis/dico_clusters_links'
+
+with open(clusters_file, 'r') as f:
+    clusters = json.load(f)
+
+# Inverser les clusters pour une recherche rapide
+node_to_cluster = {}
+for cluster, nodes in clusters.items():
+    for node in nodes:
+        node_to_cluster[node] = cluster
+
+# Ajouter les colonnes pour identifier les clusters et vérifier s'ils sont dans le même cluster
+def assign_clusters(row):
+    cluster1 = node_to_cluster.get(row['Node1'], 'Non trouvé')
+    cluster2 = node_to_cluster.get(row['Node2'], 'Non trouvé')
+    same_cluster = cluster1 == cluster2
+    return pd.Series([cluster1, cluster2, same_cluster])
+
+df[['Cluster1', 'Cluster2', 'Same_Cluster']] = df.apply(assign_clusters, axis=1)
+
+# Sauvegarder le fichier Excel mis à jour
+output_file = '/Users/lisadounia/projets_masterQ1/Web-Mining/graph/similarity/Combined_Analysis_with_Same_Cluster.xlsx'
+df.to_excel(output_file, index=False)
+
+print(f"Fichier mis à jour sauvegardé : {output_file}")
