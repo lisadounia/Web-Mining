@@ -43,10 +43,9 @@ def getsimilarlinks(url):
         corpus += i.text
     tokens = corpus.lower()
     tokens = nltk.word_tokenize(tokens)
-    tokens = [stem.stem(token)  # Étape 4 : appliquer le stemming
-              for token in nltk.word_tokenize(corpus.lower())  # Étape 1 : mise en minuscule + tokenisation
+    tokens = [stem.stem(token)  
+              for token in nltk.word_tokenize(corpus.lower())  
               if token not in string.punctuation and token not in mots_vides
-              # Étapes 2 et 3 : suppression des ponctuations et mots vides
               ]
     liste_totale += tokens
     dicoliens[soup.select('h1')[0].text] = url
@@ -67,10 +66,9 @@ def getsimilarlinks(url):
                     corpus += i.text
                 tokens = corpus.lower()
                 tokens = nltk.word_tokenize(tokens)
-                tokens = [stem.stem(token)  # Étape 4 : appliquer le stemming
-                          for token in nltk.word_tokenize(corpus.lower())  # Étape 1 : mise en minuscule + tokenisation
+                tokens = [stem.stem(token) 
+                          for token in nltk.word_tokenize(corpus.lower()) 
                           if token not in string.punctuation and token not in mots_vides
-                          # Étapes 2 et 3 : suppression des ponctuations et mots vides
                           ]
                 liste_totale += tokens
                 dicotokens[head] = tokens
@@ -92,22 +90,18 @@ def getsimilarlinks(url):
     df = df[1:]
     df.set_index(df.columns[0], inplace=True)
     total_documents = df.shape[0]
-    # Seuils en pourcentage
-    min_percentage = 20  # Termes qui apparaissent dans moins de 5% des documents
-    max_percentage = 80  # Termes qui apparaissent dans plus de 90% des documents
-    # Calcul des seuils en nombre de documents
+    min_percentage = 20  
+    max_percentage = 80  
     min_threshold = min_percentage / 100 * total_documents
     max_threshold = max_percentage / 100 * total_documents
-    # Calcul de la fréquence des documents
     document_frequency = (df > 0).sum(axis=0)
-    # Filtrer les colonnes avec document_frequency >= 5% et < 90%
     df_input = df.loc[:, (document_frequency >= min_threshold) & (document_frequency <= max_threshold)]
     df_input.to_excel("matrice_tdm.xlsx")
-    row_sums = df_input.sum(axis=1)  # Total tokens per document (row)
+    row_sums = df_input.sum(axis=1) 
     tf = df_input.div(row_sums, axis=0)
-    df = (df_input > 0).sum(axis=0)  # Number of documents containing each term (column)
+    df = (df_input > 0).sum(axis=0) 
     print(df)
-    N = df_input.shape[0]  # Number of documents
+    N = df_input.shape[0]  
     idf = np.log((N) / (df))
     tf_idf = tf.mul(idf, axis=1)
     tf_idf.to_excel("matrice_tf_idf.xlsx")
@@ -115,7 +109,6 @@ def getsimilarlinks(url):
     similarity_matrix = cosine_similarity(tf_idf)
     
     print(similarity_matrix)
-    # Étape 2 : Convertir la matrice en DataFrame pour une meilleure lisibilité
     similarity_df = pd.DataFrame(similarity_matrix, index=tf_idf.index, columns=tf_idf.index)
     similarity_df.to_excel("matrice_similarity.xlsx")
     simmat = similarity_df.iloc[:, [0]]
