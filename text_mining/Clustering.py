@@ -29,12 +29,6 @@ def extract (url) :
     for i in corpusliste : 
         corpus += i 
     return corpus
-#listedescorpus = [extract("https://en.wikipedia.org/wiki/Social_inequality"),extract("https://en.wikipedia.org/wiki/Judiciary"),extract("https://en.wikipedia.org/wiki/Negligence"),extract("https://en.wikipedia.org/wiki/Kingdom_of_Great_Britain"),extract("https://en.wikipedia.org/wiki/Seven_Years%27_War"),extract("https://en.wikipedia.org/wiki/Apple")]
-#with open(file_path, "r", encoding="utf-8") as json_file:
-#    wikipedia_data = json.load(json_file)
-
-# Extraire les valeurs dans une liste
-#listedescorpus = list(wikipedia_data.values())
 df = pd.read_csv("Top_100_Links_and_Page_Rankings.csv")
 listedescorpus = df.iloc[:, 0].tolist()
 listetemp = listedescorpus
@@ -104,11 +98,7 @@ for i in range(0, len(corpus)):
     new_bow = [b for b in bow if b[0] not in low_value_words and b[0] not in words_missing_in_tfidf]     
     corpus[i] = new_bow
 print()
-#id2word = corpora.Dictionary(datawords)
-#corpus = []
-#for text in datawords : 
-    #new = id2word.doc2bow(text)
-    #corpus.append(new)
+
 
 lda_model  =gensim.models.ldamodel.LdaModel(corpus=corpus,
                                             id2word=id2word,
