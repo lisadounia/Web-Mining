@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c3e9bc9f-d196-475b-b231-8382091cec3b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Web-Mining.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/matrix traitement.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adjacency_matrix.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/all together.py" beforeDir="false" afterPath="$PROJECT_DIR$/version1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/version0.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graph/subgraph_cohesions/2.Cohesion.py" beforeDir="false" afterPath="$PROJECT_DIR$/graph/subgraph_cohesions/2.Cohesion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/link analysis/1.Bridges_ArticulationPoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/link analysis/1.Bridges_ArticulationPoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/link analysis/Analyse similarité local.py" beforeDir="false" afterPath="$PROJECT_DIR$/link analysis/Analyse similarité local.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/link analysis/Cluster_distance_euclédienne.py" beforeDir="false" afterPath="$PROJECT_DIR$/link analysis/Cluster_distance_euclédienne.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/text_mining/code_cleaner.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,14 +35,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/lisadounia/projets_masterQ1/Web-Mining"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/lisadounia/projets_masterQ1/Web-Mining&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
