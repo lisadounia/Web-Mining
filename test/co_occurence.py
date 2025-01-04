@@ -12,7 +12,7 @@ import requests
 import pyLDAvis
 import pyLDAvis.gensim
 stopwords = stopwords.words("english")
-url = "https://en.wikipedia.org/wiki/Social_stratification"
+url = "https://en.wikipedia.org/wiki/Gender_equality"
 response = requests.get(url)
 content = response.text
 soup = BeautifulSoup(content, "html.parser")
@@ -59,38 +59,40 @@ df_fréquences = pd.DataFrame(list(dico_fréquence.items()), columns=["token", "
 df_fréquences = df_fréquences.sort_values(by='fréquence', ascending=False)
 print(df_fréquences.head(5))
 ma_liste = df_fréquences.iloc[:, 0].tolist()
-first = ma_liste[1]
+def cococcurence(first) : 
+    dico_cooccurence = {}
+    for i in range(len(corpus)) : 
+        if corpus[i] == first : 
+            avant = corpus[i-1]+"_"+first
+            après = first+"_"+corpus[i+1]
+            if avant in dico_cooccurence : 
+                dico_cooccurence[avant] += 1 
+            else : 
+                dico_cooccurence[avant] = 1 
+            if après in dico_cooccurence : 
+                dico_cooccurence[après] += 1 
+            else : 
+                dico_cooccurence[après] = 1 
+        
 
-dico_cooccurence = {}
-for i in range(len(corpus)) : 
-    if corpus[i] == first : 
-        avant = corpus[i-1]+"_"+first
-        après = first+"_"+corpus[i+1]
-        if avant in dico_cooccurence : 
-            dico_cooccurence[avant] += 1 
+    df_cooccurence= pd.DataFrame(list(dico_cooccurence.items()), columns=["cooccurendce", "fréquence"])
+    df_cooccurence = df_cooccurence.sort_values(by='fréquence', ascending=False)
+    df_cooccurence   =  (df_cooccurence.head(5))
+    ma_liste = df_cooccurence.iloc[:, 0].tolist()
+    ma_liste = ma_liste[:5]
+    fréquencesliste = []
+    for i in ma_liste  : 
+        i = str(i)
+        temp = i.split("_")
+        if temp[0] != first : 
+            mot = temp[0]
         else : 
-            dico_cooccurence[avant] = 1 
-        if après in dico_cooccurence : 
-            dico_cooccurence[après] += 1 
-        else : 
-            dico_cooccurence[après] = 1 
-    
+            mot = temp[1]
+        fréquencesliste.append(dico_fréquence[mot])
 
-df_cooccurence= pd.DataFrame(list(dico_cooccurence.items()), columns=["cooccurendce", "fréquence"])
-df_cooccurence = df_cooccurence.sort_values(by='fréquence', ascending=False)
-df_cooccurence   =  (df_cooccurence.head(5))
-ma_liste = df_cooccurence.iloc[:, 0].tolist()
-ma_liste = ma_liste[:5]
-fréquencesliste = []
-for i in ma_liste  : 
-    i = str(i)
-    temp = i.split("_")
-    if temp[0] != first : 
-        mot = temp[0]
-    else : 
-        mot = temp[1]
-    fréquencesliste.append(dico_fréquence[mot])
+    df_cooccurence["Fréquence du mot"] = fréquencesliste
+    #df_cooccurence.to_excel(titre)
+    print(df_cooccurence)
 
-df_cooccurence["Fréquence du mot"] = fréquencesliste
 
-print(df_cooccurence)
+cococcurence(ma_liste[1])

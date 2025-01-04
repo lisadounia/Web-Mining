@@ -41,7 +41,7 @@ for i in dico_mois :
     dico_mois[i] = dico
 dico_2024 = {}
 for i in dico_mois : 
-    if "2023" in i :
+    if "2024" in i :
         dico_2024[i] = dico_mois[i]
 data = dico_2024
 # Étape 1: Transformer les données
@@ -60,11 +60,27 @@ df['Rank'] = df.groupby('Month')['Count'].rank(method='first', ascending=False)
 top_topics = df.groupby('Topic')['Count'].sum().nlargest(5).index
 df_filtered = df[df['Topic'].isin(top_topics)]
 month_order = [
-    "Jan 2023", "Feb 2023", "Mar 2023", "Apr 2023", "May 2023", 
-    "Jun 2023", "Jul 2023", "Aug 2023", "Sep 2023", "Oct 2023", 
-    "Nov 2023", "Dec 2023"
+    "Jan 2024", "Feb 2024", "Mar 2024", "Apr 2024", "May 2024", 
+    "Jun 2024", "Jul 2024", "Aug 2024", "Sep 2024", "Oct 2024", 
+    "Nov 2024", "Dec 2024"
 ]
 df_filtered['Month'] = pd.Categorical(df_filtered['Month'], categories=month_order, ordered=True)
+
+# Calculer les rangs pour chaque mois (y compris les sujets non filtrés pour maintenir la cohérence des rangs)
+df['Rank'] = df.groupby('Month')['Count'].rank(method='first', ascending=False)
+
+# Remplir les mois et les rangs manquants pour les sujets sélectionnés
+complete_index = pd.MultiIndex.from_product(
+    [month_order, top_topics], names=['Month', 'Topic']
+)
+df_complete = df.set_index(['Month', 'Topic']).reindex(complete_index, fill_value=0).reset_index()
+
+# Recalculer les rangs après remplissage
+df_complete['Rank'] = df_complete.groupby('Month')['Count'].rank(method='first', ascending=False)
+
+# Filtrer uniquement les sujets dans le top_topics
+df_filtered = df_complete[df_complete['Topic'].isin(top_topics)]
+
 # Étape 2: Créer le Bump Chart
 plt.figure(figsize=(12, 8))
 sns.lineplot(
@@ -78,29 +94,30 @@ sns.lineplot(
 # Inverser l'axe des rangs (1 = meilleur rang)
 plt.gca().invert_yaxis()
 plt.grid(True, linestyle='--', alpha=0.7)
+
 # Ajouter des étiquettes et un titre
-plt.title("évolution du ranking des sujets les plus utilisés durant l'année 2024 par la bbc", fontsize=16)
+plt.title("Évolution du ranking des sujets les plus utilisés durant l'année 2024 par la BBC", fontsize=16)
 plt.xlabel('Mois', fontsize=12)
 plt.ylabel('Rang', fontsize=12)
 plt.legend(title='Sujets', bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.tight_layout()
-# Ajouter des étiquettes pour chaque point
+
 # Ajouter des étiquettes pour chaque point
 for topic in top_topics:
     topic_data = df_filtered[df_filtered['Topic'] == topic]
     for _, row in topic_data.iterrows():
         plt.text(
             row['Month'], row['Rank'] - 0.3,  # Position verticale ajustée
-            f"{int(row['Rank'])}",  # Étiquette indiquant le rang (converti en entier)
+            f"{int(row['Rank'])}",  # Étiquette indiquant le rang
             fontsize=8, color='black', ha='center'
         )
         plt.text(
             row['Month'], row['Rank'] + 0.3,  # Position légèrement au-dessus pour le nom du sujet
             f"{row['Topic']}",  # Étiquette indiquant le nom du topic
-            fontsize=7, color='black', ha='center', rotation=30  # Texte noir
+            fontsize=7, color='black', ha='center', rotation=30
         )
-
 
 # Afficher le graphique
 plt.show()
+
 

@@ -46,13 +46,26 @@ def wordcloud(url) :
                 continue
             listefinale += j + " "
     wc = WordCloud(
-        background_color='white',
-        stopwords=mots_vides,
-        height=600,
-        width=400,
-
+    background_color='white',  # Couleur de fond
+    stopwords=mots_vides,      # Liste des mots à ignorer
+    height=600,
+    width=800,                 # Plus large pour un meilleur ratio
+    max_words=200,             # Nombre maximum de mots
+    colormap='viridis',        # Palette de couleurs pour un rendu plus vif
+    contour_width=0.5,         # Ajout d'un contour léger
+    contour_color='black'      # Couleur du contour
     )
     wc.generate(listefinale)
-    wc.to_file('word_could.png')
+    nom = "thomas_piketty.png"
+    print(nom)
+    wc.to_file(nom)
 
-wordcloud("https://en.wikiquote.org/wiki/Karl_Marx")
+url = "https://en.wikiquote.org/wiki/Thomas_Piketty"
+
+#df = pd.read_csv("Top_100_Links_and_Page_Rankings.csv")
+#ma_liste = df.iloc[:, 0].tolist()
+# for i in range(5) : 
+  #  url = ma_liste[i]
+   # nombre = i
+    #print(url)
+wordcloud(url)

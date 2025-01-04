@@ -43,7 +43,7 @@ def genwords(texts) :
     return final
 
 
-url = "https://en.wikipedia.org/wiki/Social_inequality"
+url = "https://en.wikipedia.org/wiki/Economic_inequality"
 def rencoie_fréqeunces(url) : 
     dico_fréqeunce = {}
     corpus = link_to_corpus(url)
@@ -141,7 +141,7 @@ def illustrate(url) :
     df_fréquences = pd.DataFrame(list(dico_fréqeunce.items()), columns=["token", "fréquence"])
     df_fréquences = df_fréquences.sort_values(by='fréquence', ascending=False)
     ma_liste = df_fréquences.iloc[:, 0].tolist()
-    ma_liste = ma_liste[:5]
+    ma_liste = ma_liste[:10]
 
 
     dico_health_1 = dico_final(url,ma_liste[0])
@@ -149,13 +149,23 @@ def illustrate(url) :
     dico_health_3 = dico_final(url,ma_liste[2])
     dico_health_4 = dico_final(url,ma_liste[3])
     dico_health_5 = dico_final(url,ma_liste[4])
+    dico_health_6 = dico_final(url,ma_liste[5])
+    dico_health_7 = dico_final(url,ma_liste[6])
+    dico_health_8 = dico_final(url,ma_liste[7])
+    dico_health_9 = dico_final(url,ma_liste[8])
+    dico_health_10 = dico_final(url,ma_liste[9])
 
     data_dicts = [
         (dico_health_1, ma_liste[0]),
         (dico_health_2, ma_liste[1]),
         (dico_health_3, ma_liste[2]),
         (dico_health_4, ma_liste[3]),
-        (dico_health_5, ma_liste[4])
+        (dico_health_5, ma_liste[4]),
+        (dico_health_6, ma_liste[5]),
+        (dico_health_7, ma_liste[6]),
+        (dico_health_8, ma_liste[7]),
+        (dico_health_9, ma_liste[8]),
+        (dico_health_10, ma_liste[9])
     ]
 
     # Créer le graphique
@@ -172,7 +182,7 @@ def illustrate(url) :
     # Ajouter des étiquettes et un titre
     plt.xlabel("Durée")
     plt.ylabel("Fréquence")
-    plt.title("Évolution des 5 mots les plus fréquents")
+    plt.title("Évolution des 10 mots les plus fréquents dans l'article : "+url)
 
     # Ajouter une grille
     plt.grid(True, linestyle='--', alpha=0.6)
@@ -189,5 +199,8 @@ def illustrate(url) :
     plt.tight_layout()
     plt.show()
 
-url = "https://en.wikipedia.org/wiki/Gender_equality"
-illustrate(url)
+url = "https://en.wikipedia.org/wiki/Economic_inequality"
+df = pd.read_csv("Top_100_Links_and_Page_Rankings.csv")
+ma_liste = df.iloc[:, 0].tolist()
+for i in range(9,15):
+    illustrate(ma_liste[i])

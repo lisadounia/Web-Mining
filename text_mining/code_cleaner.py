@@ -102,6 +102,7 @@ def getsimilarlinks(url):
     document_frequency = (df > 0).sum(axis=0)
     # Filtrer les colonnes avec document_frequency >= 5% et < 90%
     df_input = df.loc[:, (document_frequency >= min_threshold) & (document_frequency <= max_threshold)]
+    df_input.to_excel("matrice_tdm.xlsx")
     row_sums = df_input.sum(axis=1)  # Total tokens per document (row)
     tf = df_input.div(row_sums, axis=0)
     df = (df_input > 0).sum(axis=0)  # Number of documents containing each term (column)
@@ -109,11 +110,14 @@ def getsimilarlinks(url):
     N = df_input.shape[0]  # Number of documents
     idf = np.log((N) / (df))
     tf_idf = tf.mul(idf, axis=1)
+    tf_idf.to_excel("matrice_tf_idf.xlsx")
     print(tf_idf)
     similarity_matrix = cosine_similarity(tf_idf)
+    
     print(similarity_matrix)
     # Étape 2 : Convertir la matrice en DataFrame pour une meilleure lisibilité
     similarity_df = pd.DataFrame(similarity_matrix, index=tf_idf.index, columns=tf_idf.index)
+    similarity_df.to_excel("matrice_similarity.xlsx")
     simmat = similarity_df.iloc[:, [0]]
     simmat = simmat.sort_values(by=simmat.columns[0], ascending=False)
     print(simmat)

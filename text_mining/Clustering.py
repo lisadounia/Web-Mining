@@ -112,7 +112,7 @@ print()
 
 lda_model  =gensim.models.ldamodel.LdaModel(corpus=corpus,
                                             id2word=id2word,
-                                            num_topics=15,
+                                            num_topics=18,
                                             random_state=100,
                                             update_every=1,
                                             chunksize=100,
