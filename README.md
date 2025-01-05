@@ -22,10 +22,7 @@ Avant d'exécuter le code, assurez-vous que les packages suivants sont installé
 - **matplotlib** : Création de graphiques
 - **datetime** : Manipulation de dates et d'horaires
 
-### Exemple de commande pour installer tous les packages :
-```bash
-pip install numpy gensim spacy nltk requests pyldavis beautifulsoup4 pandas matplotlib
-# La commande ci-dessus installe tous les packages nécessaires pour l'analyse temporelle.
+
 
 # Création Graphe - Consignes d'Utilisation
 
@@ -50,8 +47,3 @@ Assurez-vous que les packages suivants sont installés avant d'exécuter le code
 - **BeautifulSoup (BS4)** : Scraping de données HTML.
 - **pandas** : Manipulation de données.
 - **scipy** : Calculs scientifiques pour construire la matrice de similarité.
-
-### Exemple de commande pour installer tous les packages :
-```bash
-pip install nltk requests beautifulsoup4 pandas scipy
-# La commande ci-dessus installe les packages nécessaires pour la création de graphe.
