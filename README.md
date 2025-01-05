@@ -8,6 +8,10 @@ Ce code a pour objectif d'analyser l'historique d'un article fourni et de repré
 1. Exécutez le script Python.
 2. Lorsque le programme le demande, fournissez le lien de l'article à analyser.
 
+## Sources
+le traitement des tokens de ce code s'inspire fortement de la vidéo suivante :
+- [Tutoriel](https://www.youtube.com/watch?v=TKjjlp5_r7o)
+
 ## Packages à Installer
 Avant d'exécuter le code, assurez-vous que les packages suivants sont installés. Vous pouvez les installer via `pip` si nécessaire.
 
@@ -125,6 +129,11 @@ Ce code prend un article Wikipédia en entrée et génère un tableau de co-occu
 2. Fournissez le lien de l'article Wikipédia lorsque le programme le demande.
 3. Le script analysera l'article et affichera un tableau de co-occurrence des tokens les plus fréquents.
 
+## Sources
+le traitement des tokens de ce code s'inspire fortement de la vidéo suivante :
+- [Tutoriel](https://www.youtube.com/watch?v=TKjjlp5_r7o)
+
+
 ## Packages à Installer
 Assurez-vous que les packages suivants sont installés avant d'exécuter le script. Vous pouvez les installer avec `pip` si nécessaire :
 
@@ -136,3 +145,34 @@ Assurez-vous que les packages suivants sont installés avant d'exécuter le scri
 - **spacy** : Traitement de langage naturel.
 - **nltk** : (Natural Language Toolkit) pour l'analyse textuelle.
 - **PyLDAvis** : Visualisation des modèles thématiques (LDA).
+
+# Word_cloud - Consignes d'Utilisation
+
+## Objectif du Code
+Ce code génère un **nuage de mots** (word cloud) basé sur les tokens les plus importants d'un article Wikipédia donné en entrée.
+
+## Utilisation du Code
+1. Fournissez un lien vers un article Wikipédia lorsque le programme le demande.
+2. Si le lien est un lien Wikipédia standard, exécutez le code tel quel.
+3. Si le lien provient de **Wikiquote**, remplacez le `"p"` par `"ul"` à la ligne 38 du script avant de l'exécuter.
+4. Le code génèrera un nuage de mots des tokens les plus pertinents.
+
+## Sources
+le traitement des tokens de ce code s'inspire fortement de la vidéo suivante :
+- [Tutoriel 1](https://www.youtube.com/watch?v=TKjjlp5_r7o)
+La création du nuage de mot à été très fortement inspirée par la vidéo suivante : 
+- [Tutoriel 2](https://www.youtube.com/watch?v=HcKUU5nNmrs)
+
+
+## Packages à Installer
+Avant d'exécuter le script, assurez-vous que les packages suivants sont installés. Vous pouvez les installer via `pip` si nécessaire :
+
+- **BeautifulSoup (BS4)** : Scraping de données HTML.
+- **requests** : Requêtes HTTP pour récupérer des données.
+- **pandas** : Manipulation de données.
+- **numpy** : Calculs numériques.
+- **gensim** : Analyse de texte avancée.
+- **spacy** : Traitement de langage naturel.
+- **nltk** : (Natural Language Toolkit) pour l'analyse textuelle.
+- **PyLDAvis** : Visualisation des modèles thématiques (LDA).
+- **Wordcloud** : Génération de nuages de mots.

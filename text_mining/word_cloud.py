@@ -35,7 +35,7 @@ def wordcloud(url) :
     response = requests.get(url)
     content = response.text
     soup = BeautifulSoup(content,"html.parser")
-    corpus = soup.select("ul")
+    corpus = soup.select("p")
     for i in range(len(corpus)) : 
         corpus[i] = corpus[i].text
     listemots = genwords(lemmatization(corpus))
@@ -60,6 +60,6 @@ def wordcloud(url) :
     print(nom)
     wc.to_file(nom)
 
-url = "https://en.wikiquote.org/wiki/Thomas_Piketty"
+url = input("Entrez l'url de l'article Wikipédia: ")
 
 wordcloud(url)
