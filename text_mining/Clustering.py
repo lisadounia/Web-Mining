@@ -10,7 +10,6 @@ import pyLDAvis
 import pyLDAvis.gensim
 from bs4 import BeautifulSoup
 from gensim.models import TfidfModel
-import json
 import pandas as pd
 
 file_path = "wikipedia_corpus.json"
@@ -29,7 +28,8 @@ def extract (url) :
     for i in corpusliste : 
         corpus += i 
     return corpus
-df = pd.read_csv("Top_100_Links_and_Page_Rankings.csv")
+nom_fichier = input("Entrez le nom du fichier csv : ")
+df = pd.read_csv(nom_fichier)
 listedescorpus = df.iloc[:, 0].tolist()
 listetemp = listedescorpus
 listedescorpus = []

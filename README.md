@@ -86,3 +86,32 @@ Avant d'exécuter le code, installez les packages suivants via `pip` si nécessa
 - **matplotlib** : Création de graphiques.
 - **seaborn** : Visualisations statistiques avancées.
 - **pandas** : Manipulation des données.
+
+# Clustering - Consignes d'Utilisation
+
+## Objectif du Code
+Ce code utilise un fichier **CSV** contenant une liste de 100 liens Wikipédia en entrée et génère en sortie un fichier **HTML** représentant les différents clusters du corpus. Le modèle de clustering utilisé est l'**allocation latente de Dirichlet (LDA)**.
+
+## Utilisation du Code
+1. Préparez un fichier **CSV** contenant vos 100 liens Wikipédia.
+2. Exécutez le script et fournissez le nom du fichier CSV lorsque le programme le demande.
+3. Le script générera un fichier **HTML** que vous pourrez ouvrir dans n'importe quel navigateur pour visualiser les clusters.
+
+## Sources
+Ce code s'inspire fortement des deux vidéos suivantes :
+- [Tutoriel 1](https://www.youtube.com/watch?v=TKjjlp5_r7o)
+- [Tutoriel 2](https://www.youtube.com/watch?v=UEn3xHNBXJU&t=935s)
+
+## Packages à Installer
+Avant de lancer le script, assurez-vous que les packages suivants sont installés. Vous pouvez les installer avec `pip` si nécessaire :
+
+- **numpy** : Calculs numériques.
+- **gensim** : Analyse de texte avancée et modélisation thématique.
+- **spacy** : Traitement de langage naturel.
+- **nltk** : (Natural Language Toolkit) pour l'analyse textuelle.
+- **requests** : Requêtes HTTP pour récupérer des données.
+- **PyLDAvis** : Visualisation des modèles LDA.
+- **BeautifulSoup (BS4)** : Scraping de données HTML.
+- **pandas** : Manipulation de données.
+
+
