@@ -178,3 +178,125 @@ Avant d'exécuter le script, assurez-vous que les packages suivants sont install
 - **nltk** : (Natural Language Toolkit) pour l'analyse textuelle.
 - **PyLDAvis** : Visualisation des modèles thématiques (LDA).
 - **Wordcloud** : Génération de nuages de mots.
+
+# Extraire_Subclass - Consignes d'Utilisation
+
+## Objectif du Code
+Ce code a pour objectif d'extraire les **sous-classes** associées à chaque article Wikipédia en se basant sur les données disponibles dans l'onglet Wikidata. Voici les étapes principales effectuées par le script :  
+1. Transformation des liens Wikipédia du fichier Excel en liens Wikiquote.  
+2. Extraction des sous-classes à partir des liens transformés.  
+3. Ajout d'une nouvelle colonne intitulée **"subclass"** dans le fichier Excel original, contenant la sous-classe correspondant à chaque article Wikipédia.
+
+## Utilisation du Code
+1. Assurez-vous d'avoir le fichier **`nodes.xlsx`** généré dans la partie "Link Analysis".  
+2. Exécutez le script Python.  
+3. Le script transformera les liens, effectuera l'extraction des sous-classes, et mettra à jour le fichier Excel avec une colonne supplémentaire.  
+
+## Packages à Installer
+Avant d'exécuter le script, installez les packages suivants à l'aide de `pip` si nécessaire :  
+- **requests** : Pour envoyer des requêtes HTTP aux serveurs.  
+- **BeautifulSoup (BS4)** : Pour effectuer le scraping des données HTML.  
+- **pandas** : Pour la manipulation et la mise à jour du fichier Excel.  
+
+
+markdown
+Copier le code
+# Class_Wiki - Consignes d'Utilisation
+
+## Objectif du Code
+Ce code a pour objectif de regrouper les **sous-classes** issues du fichier Excel généré précédemment en **30 classes principales**. Cela permet de passer d'une granularité fine (sous-classes) à une classification plus générale.  
+Une nouvelle colonne intitulée **"Classes"** sera ajoutée au fichier Excel, représentant la classification générale correspondant à chaque sous-classe.
+
+## Utilisation du Code
+1. Assurez-vous d'avoir le fichier Excel généré précédemment contenant les sous-classes.  
+2. Exécutez le script Python.  
+3. Le script analysera les sous-classes et les répartira dans l'une des 30 classes principales, en ajoutant une colonne **"Classes"** au fichier Excel.
+
+## Packages à Installer
+Avant d'exécuter le script, installez les packages suivants à l'aide de `pip` si nécessaire :  
+- **pandas** : Pour manipuler les données du fichier Excel.  
+- **scikit-learn** : Pour la classification des sous-classes en classes principales.  
+- **SentenceTransformer** : Pour l'encodage des sous-classes en vecteurs permettant leur regroupement.  
+
+# Treemap - Consignes d'Utilisation
+
+## Objectif du Code
+Ce code a pour objectif de générer une **treemap** des différentes classes associées à nos liens Wikipédia.  
+La treemap offre une visualisation claire et intuitive de la répartition des classes, en mettant en évidence leur fréquence relative.
+
+## Utilisation du Code
+1. Assurez-vous de disposer d'un fichier contenant les classes associées à vos liens Wikipédia.  
+2. Exécutez le script Python.  
+3. Le script générera une **treemap** qui permettra d'observer la répartition des classes en fonction de leur fréquence.  
+
+## Packages à Installer
+Avant d'exécuter le script, installez les packages suivants à l'aide de `pip` si nécessaire :  
+- **plotly_express** : Pour générer la treemap.  
+- **pandas** : Pour manipuler les données en entrée.  
+
+
+markdown
+Copier le code
+# Wikiquote - Consignes d'Utilisation
+
+## Objectif du Code
+Ce code exploite les **16 clusters** identifiés lors de la "link analysis" et sélectionne une **personnalité publique** représentative pour chacun de ces clusters. Voici les étapes principales du processus :  
+1. À partir des liens Wikipédia des personnalités sélectionnées, le code génère leurs liens Wikiquote.  
+2. Il accède à l'onglet Wikiquote correspondant et extrait uniquement le **corpus** de la page, c'est-à-dire leurs **citations** et **discours**, en excluant les titres, sous-titres, etc.  
+3. Le contenu extrait est ensuite stocké dans un **dictionnaire** au format JSON, où chaque clé est l'URL Wikipédia de la personnalité, et chaque valeur contient l'ensemble de ses citations.
+
+## Utilisation du Code
+1. Assurez-vous d'avoir accès aux liens Wikipédia des personnalités publiques des 16 clusters identifiés.  
+2. Exécutez le script Python.  
+3. Le code générera un fichier JSON contenant les citations de chaque personnalité, organisées par leur URL Wikipédia.  
+
+## Packages à Installer
+Avant d'exécuter le script, installez les packages suivants à l'aide de `pip` si nécessaire :  
+- **requests** : Pour récupérer le contenu HTML des pages Wikiquote.  
+- **BeautifulSoup (BS4)** : Pour extraire le corpus à partir du code HTML des pages Wikiquote.  
+
+# Texte_Nettoyage - Consignes d'Utilisation
+
+## Objectif du Code
+Ce code a pour objectif de **nettoyer les citations** précédemment extraites. Il supprime tous les éléments non pertinents, tels que :  
+- Les sources  
+- Les pages  
+- Les dates  
+- Les volumes  
+- Les chapitres  
+- Et d'autres informations inutiles.  
+
+À l'issue du nettoyage, le script enregistre les citations nettoyées dans un nouveau fichier au format **JSON**.
+
+## Utilisation du Code
+1. Assurez-vous de disposer du fichier JSON contenant les citations brutes extraites à l'aide du script précédent.  
+2. Exécutez le script Python.  
+3. Le code nettoiera les citations et enregistrera les résultats dans un nouveau fichier JSON.  
+
+## Packages à Installer
+Avant d'exécuter le script, assurez-vous que les packages suivants sont installés :  
+- **pandas** : Pour la manipulation des données structurées.  
+- **json** : Pour lire et écrire les fichiers JSON. (Généralement inclus avec Python.)  
+
+markdown
+Copier le code
+# Analyse_Semantique - Consignes d'Utilisation
+
+## Objectif du Code
+Ce code réalise une **analyse sémantique** basée sur le fichier JSON contenant les citations nettoyées. Voici les principales étapes effectuées par le script :  
+1. Analyse de chaque citation pour chaque personne dans le fichier JSON, phrase par phrase.  
+2. Calcul d'un **score sémantique** (compris entre -1 et 1) pour chaque phrase.  
+3. Classification des citations en **positives**, **négatives**, ou **neutres**.  
+4. Calcul du **score final** pour l'ensemble des citations de chaque personne, avec une évaluation du **caractère général** (positif, négatif ou neutre).  
+5. Enregistrement des résultats dans un fichier **JSON** pour une analyse ultérieure.  
+
+## Utilisation du Code
+1. Assurez-vous de disposer du fichier JSON contenant les citations nettoyées.  
+2. Exécutez le script Python.  
+3. Le script analysera les citations et générera un fichier JSON contenant :  
+   - Le nombre total de citations positives, négatives, ou neutres pour chaque personne.  
+   - Le score final et le caractère général des citations de chaque personne.  
+
+## Package à Installer
+Avant d'exécuter le script, installez le package suivant à l'aide de `pip` si nécessaire :  
+- **vaderSentiment** : Pour effectuer l'analyse sémantique des phrases.  
