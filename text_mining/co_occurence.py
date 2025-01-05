@@ -91,7 +91,6 @@ def cococcurence(first) :
         fréquencesliste.append(dico_fréquence[mot])
 
     df_cooccurence["Fréquence du mot"] = fréquencesliste
-    #df_cooccurence.to_excel(titre)
     print(df_cooccurence)
 
 

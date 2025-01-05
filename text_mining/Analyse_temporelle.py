@@ -1,6 +1,5 @@
 import numpy as np 
 import gensim
-import gensim.corpora as corpora
 from gensim.utils import simple_preprocess
 import spacy
 from  nltk.corpus import stopwords
@@ -168,39 +167,30 @@ def illustrate(url) :
         (dico_health_10, ma_liste[9])
     ]
 
-    # Créer le graphique
     plt.figure(figsize=(12, 7))
 
     for data, label in data_dicts:
-        # Conversion des clés en dates et tri
         dates = [datetime.strptime(date, "%d %B %Y") for date in data.keys()]
         frequencies = [data[date] for date in data.keys()]
         
-        # Ajouter les données au graphique
         plt.plot(dates, frequencies, marker='o', linestyle='-', label=label)
 
-    # Ajouter des étiquettes et un titre
     plt.xlabel("Durée")
     plt.ylabel("Fréquence")
     plt.title("Évolution des 10 mots les plus fréquents dans l'article : "+url)
 
-    # Ajouter une grille
     plt.grid(True, linestyle='--', alpha=0.6)
 
-    # Améliorer la lisibilité de l'axe X
     plt.gca().xaxis.set_major_locator(mdates.AutoDateLocator())
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%d %b %Y"))
     plt.gcf().autofmt_xdate(rotation=45)
 
-    # Ajouter la légende
     plt.legend()
 
-    # Afficher le graphique
     plt.tight_layout()
     plt.show()
 
 url = "https://en.wikipedia.org/wiki/Economic_inequality"
-df = pd.read_csv("Top_100_Links_and_Page_Rankings.csv")
-ma_liste = df.iloc[:, 0].tolist()
-for i in range(9,15):
-    illustrate(ma_liste[i])
+
+url = input("Quelle est l'article Wikipédia que vous voulez analyser ? ")
+illustrate(url)

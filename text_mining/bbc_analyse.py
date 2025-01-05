@@ -2,17 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 matrice = []
-#url = "https://www.bbc.com/search?q=social%20inequality"
-#response = requests.get(url)
-#content = response.text
-#soup = BeautifulSoup(content, "html.parser")
-#element = soup.find("span", class_="sc-6fba5bd4-1 efYorw")
-#url = "https://www.bbc.com/news/articles/cp3zee35x6ko"
-#response = requests.get(url)
-#content = response.text
-#soup = BeautifulSoup(content, "html.parser")
-#soup = soup.find("div", class_="sc-4b0aaa-0 dGavUm")
-#soup = soup.select("a") 
+
 
 url = "https://www.bbc.com/search?q=social+inequality&page="
 
@@ -37,10 +27,8 @@ for i in range(176) :
         print(article_url)
         print(date)
         try:
-    # Tenter de sélectionner tous les éléments "a"
             soup_article = soup_article.select("a")
         except Exception as e:
-            # Si une exception est levée, assigner une liste avec "no_topics"
             soup_article = ["no_topics"] 
         for k in range(len(soup_article)) : 
             if soup_article[k] != "no_topics" : 
