@@ -160,7 +160,9 @@ Ce code génère un **nuage de mots** (word cloud) basé sur les tokens les plus
 ## Sources
 le traitement des tokens de ce code s'inspire fortement de la vidéo suivante :
 - [Tutoriel 1](https://www.youtube.com/watch?v=TKjjlp5_r7o)
+
 La création du nuage de mot à été très fortement inspirée par la vidéo suivante : 
+
 - [Tutoriel 2](https://www.youtube.com/watch?v=HcKUU5nNmrs)
 
 
