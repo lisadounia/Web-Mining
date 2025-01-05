@@ -64,3 +64,25 @@ Assurez-vous que les packages suivants sont installés avant d'exécuter le code
 - **requests** : Pour récupérer les données depuis le site BBC News.
 - **BeautifulSoup (BS4)** : Pour scraper et analyser les données HTML.
 - **pandas** : Pour manipuler et sauvegarder les données dans un fichier CSV.
+
+markdown
+Copier le code
+# BBC_ranking - Consignes d'Utilisation
+
+## Objectif du Code
+Ce code analyse le fichier généré par le script **Collection_de_BBC** pour établir un classement des termes les plus abordés au cours d'une année précise. Les résultats sont présentés sous forme d'un tableau évolutif.
+
+## Utilisation du Code
+1. Assurez-vous d'avoir exécuté le script **Collection_de_BBC** au préalable pour générer le fichier de données.
+2. Exécutez ce script et fournissez :
+   - Le nom du fichier CSV généré par **Collection_de_BBC**.
+   - L'année à analyser.
+3. Notez que les articles publiés avant 2023 sont moins catégorisés sur BBC News, ce qui peut affecter la qualité de l'analyse.
+
+## Packages à Installer
+Avant d'exécuter le code, installez les packages suivants via `pip` si nécessaire :
+
+- **ast** : Manipulation des structures de données littérales en Python.
+- **matplotlib** : Création de graphiques.
+- **seaborn** : Visualisations statistiques avancées.
+- **pandas** : Manipulation des données.

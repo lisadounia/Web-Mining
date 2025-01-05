@@ -4,7 +4,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 dico = {}
 dico_mois = {}
-df = pd.read_csv('articles_bbc.csv')
+
+nom_fichier = input("Entrez le nom du fichier csv : ")
+date_année = input("Entrez l'année que vous voulez analyser : ")
+df = pd.read_csv(nom_fichier)
 
 date =  df.iloc[:, 2].tolist()
 topics = df.iloc[:, 3].tolist()
@@ -41,7 +44,7 @@ for i in dico_mois :
     dico_mois[i] = dico
 dico_2024 = {}
 for i in dico_mois : 
-    if "2024" in i :
+    if date_année in i :
         dico_2024[i] = dico_mois[i]
 data = dico_2024
 rows = []
@@ -55,9 +58,9 @@ df['Rank'] = df.groupby('Month')['Count'].rank(method='first', ascending=False)
 top_topics = df.groupby('Topic')['Count'].sum().nlargest(5).index
 df_filtered = df[df['Topic'].isin(top_topics)]
 month_order = [
-    "Jan 2024", "Feb 2024", "Mar 2024", "Apr 2024", "May 2024", 
-    "Jun 2024", "Jul 2024", "Aug 2024", "Sep 2024", "Oct 2024", 
-    "Nov 2024", "Dec 2024"
+    "Jan "+date_année, "Feb "+date_année, "Mar "+date_année, "Apr "+date_année, "May "+date_année, 
+    "Jun "+date_année, "Jul "+date_année, "Aug "+date_année, "Sep "+date_année, "Oct "+date_année, 
+    "Nov "+date_année, "Dec "+date_année
 ]
 df_filtered['Month'] = pd.Categorical(df_filtered['Month'], categories=month_order, ordered=True)
 
@@ -84,7 +87,7 @@ sns.lineplot(
 plt.gca().invert_yaxis()
 plt.grid(True, linestyle='--', alpha=0.7)
 
-plt.title("Évolution du ranking des sujets les plus utilisés durant l'année 2024 par la BBC", fontsize=16)
+plt.title("Évolution du ranking des sujets les plus utilisés durant l'année "+date_année+" par la BBC", fontsize=16)
 plt.xlabel('Mois', fontsize=12)
 plt.ylabel('Rang', fontsize=12)
 plt.legend(title='Sujets', bbox_to_anchor=(1.05, 1), loc='upper left')
