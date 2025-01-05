@@ -12,7 +12,7 @@ import requests
 import pyLDAvis
 import pyLDAvis.gensim
 stopwords = stopwords.words("english")
-url = "https://en.wikipedia.org/wiki/Gender_equality"
+url = input("Entrez l'url de l'article Wikipédia: ")
 response = requests.get(url)
 content = response.text
 soup = BeautifulSoup(content, "html.parser")
@@ -94,4 +94,5 @@ def cococcurence(first) :
     print(df_cooccurence)
 
 
-cococcurence(ma_liste[1])
+for i in ma_liste : 
+    cococcurence(i)

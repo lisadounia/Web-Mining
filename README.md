@@ -115,3 +115,24 @@ Avant de lancer le script, assurez-vous que les packages suivants sont installé
 - **pandas** : Manipulation de données.
 
 
+# Co-occurrence - Consignes d'Utilisation
+
+## Objectif du Code
+Ce code prend un article Wikipédia en entrée et génère un tableau de co-occurrence des 5 tokens les plus fréquents dans l'article.
+
+## Utilisation du Code
+1. Lancez le script Python.
+2. Fournissez le lien de l'article Wikipédia lorsque le programme le demande.
+3. Le script analysera l'article et affichera un tableau de co-occurrence des tokens les plus fréquents.
+
+## Packages à Installer
+Assurez-vous que les packages suivants sont installés avant d'exécuter le script. Vous pouvez les installer avec `pip` si nécessaire :
+
+- **BeautifulSoup (BS4)** : Scraping de données HTML.
+- **requests** : Requêtes HTTP pour récupérer des données.
+- **pandas** : Manipulation de données.
+- **numpy** : Calculs numériques.
+- **gensim** : Analyse de texte avancée.
+- **spacy** : Traitement de langage naturel.
+- **nltk** : (Natural Language Toolkit) pour l'analyse textuelle.
+- **PyLDAvis** : Visualisation des modèles thématiques (LDA).
