@@ -77,7 +77,7 @@ Assurez-vous que les packages suivants sont installés avant d'exécuter le code
 - **pandas** : Manipulation de données.
 - **scipy** : Calculs scientifiques pour construire la matrice de similarité.
 
----
+
 ---
 ## Collection_de_BBC 
 
