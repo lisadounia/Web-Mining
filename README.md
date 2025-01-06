@@ -531,7 +531,6 @@ Avant d'exécuter le script, installez les packages suivants à l'aide de `pip` 
 - **BeautifulSoup (BS4)** : Pour extraire le corpus à partir du code HTML des pages Wikiquote.  
 
 ---
----
 ## Word_cloud 
 
 #### Objectif du Code
