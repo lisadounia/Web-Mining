@@ -1,4 +1,250 @@
 # Web-Mining
+# Analyse des inégalités sociales  
+
+## Présentation du projet  
+Dans le cadre du cours de **Web Mining**, nous nous sommes improvisés consultants pour l’ambassade britannique afin de mener une analyse approfondie sur les **inégalités sociales**. Ce projet vise à apporter des insights clés pour préparer les prochaines campagnes de sensibilisation et d’action.  
+
+Deux questions principales ont orienté notre travail :  
+1. **Quelles sont les thématiques clés permettant de mieux comprendre les inégalités sociales ?**  
+2. **Comment les concepts clés liés aux inégalités sociales interagissent-ils entre eux ?**  
+
+Pour y répondre, nous avons adopté une démarche en deux étapes principales :  
+- **Web scraping** : Extraction d’articles pertinents depuis les sites **Wikipedia** et **BBC News**.
+- **Analyses combinées** : Intégration de la **Link Analysis** et de la **Text Analysis**  pour une compréhension globale.  
+
+Ces analyses nous ont permis de :  
+- Identifier les thématiques essentielles en lien avec les inégalités sociales.  
+- Visualiser les interactions complexes entre ces thématiques et concepts grâce à des graphes et des représentations textuelles.  
+- Fournir des résultats exploitables pour guider les actions de l’ambassade.  
+
+---
+
+## Arborescence des modules et scripts
+
+- **data_collection** :  Récupération et structuration des données.
+  - `Data_collection.py` : Extraction des données
+  - `Nodes_Edges_Format_Gephy.py` : Formatage des graphes pour Gephi
+
+- **link_analysis** : Analyse des relations et visualisation des graphes.
+  - `A.Structure_Cohésion` : Analyse de la structure et de la cohésion
+  - `B.Analyse_similarités` : Étude des similarités
+  - `C.Distances_euclidiennes` : Calcul des distances entre concepts
+
+- **text_analysis** : Analyse sémantique et textuelle pour approfondir les résultats.
+  - `Analyse_sémantique.py` : Étude des concepts clés
+  - `Analyse_temporelle.py` : Analyse temporelle des articles
+  - `BBC_ranking.py` : Classement des articles BBC
+  - `Class_wiki.py` : Classification des articles Wikipedia
+  - `Clustering.py` : Clustering thématique
+  - `co_occurence.py` : Analyse de co-occurrences
+  - `texte_nettoyage.py` : Prétraitement des données textuelles
+  - `treemap.py` : Visualisation en treemap
+  - `wikiquote.py` : Extraction de citations
+  - `word_cloud.py` : Génération de nuages de mots
+
+---
+# Partie : Link Analysis  
+## A.Structure_Cohésion
+
+### Points d'Articulation, Ponts et Composantes Fortement Connexes  
+
+#### Objectif du Code
+Ce script utilise une matrice d'adjacence pour analyser les propriétés structurelles d'un graphe dirigé représentant des concepts liés aux **inégalités sociales**.  
+Il identifie les **points d'articulation**, les **ponts**, et les **composantes fortement connexes (SCC)** pour mieux comprendre les relations entre les nœuds du graphe.
+
+---
+
+#### Utilisation du Code
+
+1. Assurez-vous de disposer de la matrice d'adjacence au format Excel (`adjacency_matrix_V2.xlsx`).
+2. Exécutez le script Python.
+3. Le programme fournira des informations sur :
+   - Les propriétés générales du graphe (nœuds, arêtes, densité).
+   - Les points d'articulation et leur impact.
+   - Les ponts critiques dans la connectivité.
+   - La composante fortement connexes et sa structure.
+
+---
+
+#### Packages à Installer
+
+Avant d'exécuter le script, installez les packages suivants via `pip` :
+
+- `pandas` : Manipulation de la matrice d'adjacence.
+
+---
+
+### Sous-groupes, Cliques et K-Cores dans les Graphes  
+
+#### Objectif du Code  
+Ce script utilise une matrice d'adjacence pour explorer les propriétés structurelles du graphe et identifie différents sous-graphe. 
+
+---
+
+#### Utilisation du Code  
+
+1. Assurez-vous de disposer de la matrice d'adjacence au format Excel (`adjacency_matrix_V2.xlsx`).  
+2. Exécutez le script Python.  
+3. Le programme fournira des informations sur :  
+   - Les propriétés générales du graphe (nœuds, arêtes, densité, distance géodésique moyenne).  
+   - Les cliques 
+   - Les n-cliques
+   - Les clans 
+   - Les k-cores 
+
+---
+
+#### Packages à Installer  
+
+Avant d'exécuter le script, installez les packages suivants via `pip` :  
+- `pandas` : Manipulation de la matrice d'adjacence.  
+- `networkx` : Analyse et visualisation des graphes.  
+- `collections` : Pour les compteurs (Counter).
+
+___
+
+## B.Analyse_similarités
+
+###  Analyse de Similarité globale :  Probabilités Stationnaires et Clusters  
+
+#### Objectif du Code  
+Ce script calcule les probabilités stationnaires d'un graphe basé sur une matrice de transition aléatoire.  
+Il identifie également les **clusters** du graphe et calcule la somme des probabilités stationnaires pour chaque cluster.  
+
+Ces analyses permettent de :  
+- Identifier les nœuds les plus influents selon leur probabilité stationnaire.  
+- Comprendre la distribution des probabilités dans les différents clusters.
+
+---
+
+#### Utilisation du Code  
+
+1. Assurez-vous de disposer des fichiers nécessaires :  
+   - `nodes.xlsx` : Contient les informations sur les nœuds du graphe (ID et Label).  
+   - `random_walk_transition_matrix.xlsx` : Matrice de transition pour le calcul des probabilités stationnaires.  
+   - `dico_clusters_links` : Fichier JSON contenant la répartition des nœuds par cluster.  
+
+2. Exécutez le script Python.  
+
+3. Les résultats suivants seront générés :  
+   - `stationary_probabilities.xlsx` : Classement des nœuds selon leur probabilité stationnaire.  
+   - `cluster_stationary_probabilities.xlsx` : Somme des probabilités stationnaires pour chaque cluster.  
+
+---
+
+#### Packages à Installer  
+
+Avant d'exécuter le script, installez les packages suivants via `pip` :  
+
+- `pandas` : Manipulation des données tabulaires.  
+- `numpy` : Calcul des valeurs et vecteurs propres.  
+- `json` : Manipulation des fichiers JSON.  
+
+___
+###  Analyses de Similarité locale
+
+#### Objectif du Code  
+Ce script réalise différentes analyses de similarité entre les nœuds d'un graphe basé sur :  
+- **Cosine Similarity** : Calcul des similarités cosinus entre les nœuds.  
+- **Préférence Attachée** : Mesure de la probabilité qu'un lien soit formé en fonction des degrés des nœuds.  
+- **Voisins Communs** : Identification des paires de nœuds partageant un nombre significatif de voisins communs.  
+- **Analyse Combinée** : Intégration de plusieurs similarités avec vérification des clusters.  
+
+Le script génère des résultats exploitables sous forme de fichiers Excel pour visualiser et analyser les similarités et les relations entre nœuds.
+
+---
+
+#### Utilisation du Code  
+
+1. **Fichiers nécessaires** :  
+   - `similarity_cosine.xlsx` : Matrice de similarité cosinus.  
+   - `similarity_preferential_attachment.xlsx` : Matrice de préférence attachée.  
+   - `similarity_common_neighbors.xlsx` : Matrice des voisins communs.  
+   - `nodes.xlsx` : Liste des nœuds avec leurs identifiants et labels.  
+   - `dico_clusters_links` : Fichier JSON contenant les clusters.  
+
+2. **Étapes d'exécution** :  
+   - Exécutez le script Python après avoir configuré les chemins vers les fichiers.  
+   - Le programme produira plusieurs fichiers Excel avec les résultats de chaque analyse.  
+
+---
+
+#### Packages à Installer  
+
+Avant d'exécuter le script, installez les packages suivants via `pip` :  
+
+- `pandas` : Manipulation des données tabulaires.  
+- `numpy` : Calcul des valeurs numériques.  
+- `json` : Manipulation des fichiers JSON.  
+
+___
+
+### Création des matrices de similarité
+
+## Objectif du Code  
+Ce script réalise des calculs de **similarité locale** et **globale** sur les nœuds d'un graphe en utilisant une matrice d'adjacence.  
+Il génère des matrices de similarité et exporte les résultats sous forme de fichiers Excel pour des analyses ultérieures.
+
+---
+
+#### Utilisation du Code  
+
+1. **Fichier nécessaire** :  
+   - `adjacency_matrix_V2.xlsx` : Matrice d'adjacence du graphe.  
+
+2. **Étapes d'exécution** :  
+   - Configurez le chemin vers la matrice d'adjacence dans le script.  
+   - Exécutez le script Python.  
+   - Les matrices de similarité seront exportées sous forme de fichiers Excel dans le dossier spécifié.  
+
+---
+
+#### Packages à Installer  
+
+Avant d'exécuter le script, installez les packages suivants via `pip` :  
+
+-`math` : Opération mathématique 
+- `numpy` : Calcul matriciel et algébrique.  
+- `pandas` : Manipulation des données tabulaires et export des matrices.  
+- `scipy` : Calculs scientifiques et manipulation des matrices creuses.  
+
+---
+## C.Distances_euclidiennes
+
+### Analyse des Clusters et Distances Euclidiennes  
+
+#### Objectif du Code  
+Ce script effectue une analyse des clusters basés sur leurs coordonnées géographiques (`X`, `Y`) et leur modularité.  
+Il génère :  
+1. Un graphique représentant les clusters avec des cercles proportionnels à leurs rayons.  
+2. Une matrice des distances euclidiennes entre les centres des clusters.  
+
+---
+
+#### Utilisation du Code  
+
+1. **Fichier nécessaire** :  
+   - `Linkclusters_info.csv` : Contient les informations des clusters, y compris les coordonnées (`X`, `Y`) et les classes de modularité (`modularity_class`).  
+
+2. **Étapes d'exécution** :  
+   - Chargez le fichier CSV contenant les informations des clusters.  
+   - Exécutez le script Python.  
+   - Les résultats suivants seront générés :  
+     - Un graphique des clusters.  
+     - Un fichier Excel contenant les distances entre les clusters (`cluster_distance_matrix.xlsx`).  
+
+---
+
+#### Packages à Installer  
+
+Avant d'exécuter le script, installez les packages suivants via `pip` :  
+
+- `pandas` : Manipulation des données tabulaires.  
+- `matplotlib` : Visualisation des clusters.  
+- `itertools` : Combinaisons pour le calcul des distances.  
+- `math` : Calcul des distances euclidiennes.  
+___
+
 # Analyse Temporelle - Consignes d'Utilisation
 
 ## Objectif du Code
