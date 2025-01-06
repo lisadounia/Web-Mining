@@ -214,9 +214,9 @@ Avant d'exécuter le script, installez les packages suivants via `pip` :
 
 ___
 
-### Création des matrices de similarité
+### Matrices de similarités
 
-## Objectif du Code  
+#### Objectif du Code  
 Ce script réalise des calculs de **similarité locale** et **globale** sur les nœuds d'un graphe en utilisant une matrice d'adjacence.  
 Il génère des matrices de similarité et exporte les résultats sous forme de fichiers Excel pour des analyses ultérieures.
 
@@ -530,7 +530,6 @@ Avant d'exécuter le script, installez les packages suivants à l'aide de `pip` 
 - **requests** : Pour récupérer le contenu HTML des pages Wikiquote.  
 - **BeautifulSoup (BS4)** : Pour extraire le corpus à partir du code HTML des pages Wikiquote.  
 
----
 ---
 ## Word_cloud 
 
