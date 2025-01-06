@@ -300,7 +300,7 @@ Avant d'exécuter le script, installez les packages suivants via `pip` :
 ---
 # Partie : Text Analysis
 ---
-## Analyse Temporelle  ( `Analyse_temporelle.py` )
+## Analyse Temporelle 
 
 #### Objectif du Code  
 Ce code a pour objectif d'analyser l'historique d'un article fourni et de représenter, sous forme de graphique, l'évolution des tokens pertinents les plus fréquents sur une période déterminée.
