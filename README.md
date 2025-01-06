@@ -41,8 +41,20 @@ Ces analyses nous ont permis de :
   - `treemap.py` : Visualisation en treemap
   - `wikiquote.py` : Extraction de citations
   - `word_cloud.py` : Génération de nuages de mots
+ 
+
+
 
 ---
+# Partie : Data Collection 
+
+
+
+---
+
+
+
+
 # Partie : Link Analysis  
 ## A.Structure_Cohésion
 
@@ -244,7 +256,8 @@ Avant d'exécuter le script, installez les packages suivants via `pip` :
 - `itertools` : Combinaisons pour le calcul des distances.  
 - `math` : Calcul des distances euclidiennes.  
 ___
-
+---
+# Partie : Text Analysis
 # Analyse Temporelle - Consignes d'Utilisation
 
 ## Objectif du Code
