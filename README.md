@@ -28,6 +28,7 @@ Ces analyses nous ont permis de :
 
 - **data_collection** :  Récupération et structuration des données.
   - `Data_collection.py` : Extraction des données
+  - `Collecte_de_BBC.py` : Collecter d'articles de la BBC
 - **link_analysis** : Analyse des relations et visualisation des graphes.
   - `A.Structure_Cohésion` : Analyse de la structure et de la cohésion
   - `B.Analyse_similarités` : Étude des similarités
@@ -76,7 +77,23 @@ Assurez-vous que les packages suivants sont installés avant d'exécuter le code
 - **pandas** : Manipulation de données.
 - **scipy** : Calculs scientifiques pour construire la matrice de similarité.
 
+---
+---
+## Collection_de_BBC 
 
+#### Objectif du Code
+Ce code parcourt les pages du site **BBC News** pour collecter les articles liés aux inégalités sociales, en enregistrant leurs dates, catégories, et autres informations pertinentes.
+
+#### Utilisation du Code
+1. Exécutez le script Python.
+2. Le programme générera automatiquement un fichier **CSV** contenant toutes les informations collectées.
+
+#### Packages à Installer
+Assurez-vous que les packages suivants sont installés avant d'exécuter le code. Vous pouvez les installer via `pip` si nécessaire.
+
+- **requests** : Pour récupérer les données depuis le site BBC News.
+- **BeautifulSoup (BS4)** : Pour scraper et analyser les données HTML.
+- **pandas** : Pour manipuler et sauvegarder les données dans un fichier CSV.
 ---
 
 # Partie : Link Analysis  
@@ -337,22 +354,6 @@ Avant d'exécuter le script, installez le package suivant à l'aide de `pip` si 
 - **vaderSentiment** : Pour effectuer l'analyse sémantique des phrases.  
 
 
----
-## Collection_de_BBC 
-
-#### Objectif du Code
-Ce code parcourt les pages du site **BBC News** pour collecter les articles liés aux inégalités sociales, en enregistrant leurs dates, catégories, et autres informations pertinentes.
-
-#### Utilisation du Code
-1. Exécutez le script Python.
-2. Le programme générera automatiquement un fichier **CSV** contenant toutes les informations collectées.
-
-#### Packages à Installer
-Assurez-vous que les packages suivants sont installés avant d'exécuter le code. Vous pouvez les installer via `pip` si nécessaire.
-
-- **requests** : Pour récupérer les données depuis le site BBC News.
-- **BeautifulSoup (BS4)** : Pour scraper et analyser les données HTML.
-- **pandas** : Pour manipuler et sauvegarder les données dans un fichier CSV.
 
 ---
 ## BBC_ranking
