@@ -165,7 +165,6 @@ def recursive_crawl(link, depth, pages_list, adjacency_dict, visited, current_de
 
 
 def build_recursive_adjacency_matrix(start_link, depth=2):
-    print("building graph dynamically")
     pages_list = []  # Liste des pages explorées
     adjacency_dict = {}  # Dictionnaire pour stocker les relations
     visited=set()
