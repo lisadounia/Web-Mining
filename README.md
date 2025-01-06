@@ -214,9 +214,9 @@ Avant d'exécuter le script, installez les packages suivants via `pip` :
 
 ___
 
-### Création des matrices de similarité
+### Matrices de similarités
 
-## Objectif du Code  
+#### Objectif du Code  
 Ce script réalise des calculs de **similarité locale** et **globale** sur les nœuds d'un graphe en utilisant une matrice d'adjacence.  
 Il génère des matrices de similarité et exporte les résultats sous forme de fichiers Excel pour des analyses ultérieures.
 
