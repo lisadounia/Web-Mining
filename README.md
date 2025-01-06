@@ -69,8 +69,7 @@ Assurez-vous que les packages suivants sont installés avant d'exécuter le code
 - **BeautifulSoup (BS4)** : Pour scraper et analyser les données HTML.
 - **pandas** : Pour manipuler et sauvegarder les données dans un fichier CSV.
 
-markdown
-Copier le code
+
 # BBC_ranking - Consignes d'Utilisation
 
 ## Objectif du Code
@@ -199,8 +198,7 @@ Avant d'exécuter le script, installez les packages suivants à l'aide de `pip` 
 - **pandas** : Pour la manipulation et la mise à jour du fichier Excel.  
 
 
-markdown
-Copier le code
+
 # Class_Wiki - Consignes d'Utilisation
 
 ## Objectif du Code
@@ -235,8 +233,7 @@ Avant d'exécuter le script, installez les packages suivants à l'aide de `pip` 
 - **pandas** : Pour manipuler les données en entrée.  
 
 
-markdown
-Copier le code
+
 # Wikiquote - Consignes d'Utilisation
 
 ## Objectif du Code
@@ -278,8 +275,7 @@ Avant d'exécuter le script, assurez-vous que les packages suivants sont install
 - **pandas** : Pour la manipulation des données structurées.  
 - **json** : Pour lire et écrire les fichiers JSON. (Généralement inclus avec Python.)  
 
-markdown
-Copier le code
+
 # Analyse_Semantique - Consignes d'Utilisation
 
 ## Objectif du Code
