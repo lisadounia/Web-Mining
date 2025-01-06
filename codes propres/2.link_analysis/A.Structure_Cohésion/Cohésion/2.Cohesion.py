@@ -23,7 +23,6 @@ print(f"Distance géodésique moyenne : {avg_shortest_path_length:.2f}")
 
 
 #Cliques
-print(f"\n========== Analyse des cliques ==============")
 cliques = list(nx.find_cliques(G_undirected))
 largest_clique = max(cliques, key=len)
 sorted_cliques = sorted(cliques, key=len, reverse=True)  # Trier par taille décroissante
