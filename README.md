@@ -10,7 +10,7 @@ Deux questions principales ont orienté notre travail :
 
 Pour y répondre, nous avons adopté une démarche en deux étapes principales :  
 - **Web scraping** : Extraction d’articles pertinents depuis les sites **Wikipedia** et **BBC News**.
-- **Analyses combinées** : Intégration de la **Link Analysis** et de la **Text Analysis**  pour une compréhension globale.  
+- **Analyses combinées** : Intégration d'une analyse de graphe et d'une analyse textuelle.  
 
 Ces analyses nous ont permis de :  
 - Identifier les thématiques essentielles en lien avec les inégalités sociales.  
@@ -53,13 +53,13 @@ Ces analyses nous ont permis de :
 # Partie : Data Collection 
 ---
 
-## Création Graphe
+## Data Collection
 
 #### Objectif du Code
 Ce code permet de construire un graphe représentant la structure de Wikipédia à partir d'un article donné (par défaut : **Social Inequality**). Il explore les relations entre articles similaires sur deux niveaux d'exploration de Wikipédia. 
 
 Les étapes principales incluent : 
-1. Création d'une matrice **terme-document**.
+1. Création d'une matrice **term-document**.
 2. Vectorisation de cette matrice.
 3. Construction d'une matrice de similarité pour relier les articles.
 
